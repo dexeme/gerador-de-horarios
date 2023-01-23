@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Config -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<!-- Links -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/script.js"></script>
+
+<link rel="icon" href="./favicons/icon-16x16.png">
+<link rel="stylesheet" href="/style.css">
+
+<!-- Page Title -->
+
+<title>GERADOR DE HORÁRIOS</title>
+
+<!-- Subjects information -->
+<table>
+    <thead>
+        <tr>
+            <th>Carga horária</th>
+            <th>Nome</th>
+            <th>Vezes na semana</th>
+        </tr>
+    </thead>
+    <tbody id="data-output"></tbody>
+</table>
+
+<!-- Schedule table -->
+<table id="schedule-table">
+    <tr>
+      <th>Segunda</th>
+      <th>Terça</th>
+      <th>Quarta</th>
+      <th>Quinta</th>
+      <th>Sexta</th>
+    </tr>
+  </table>
+  
+  <form>
+      <div class="formBox">
+          <div id="msg">
+              <!-- Select option 1-4 credits -->
+              <select id="valueInput">
+                  <option value="1">1 Crédito</option>
+                  <option value="2">2 Créditos</option>
+                  <option value="3">3 Créditos</option>
+                  <option value="4">4 Créditos</option></select>
+
+            <input type="text" id="name" placeholder="Name" />
+
+            <input type="text" id="times" placeholder="Times" />
+
+            <button id="btn">Click to Add</button>
+            <button id="btn2">Click to Delete</button>
+            <button id="btn3">Click to Clear</button>
+
+            <pre></pre>
+        </div>
+</form>
+
+<!-- Selected subjects -->
+
+<table id="schedule-table" style="overflow: auto;">
+  <form>
+    <label for="Monday-input">Monday:</label>
+    <select id="Monday-input">
+    </select>
+    <br>
+    <label for="Tuesday-input">Tuesday:</label>
+    <select id="Tuesday-input">
+    </select>
+    <br>
+    <label for="Wednesday-input">Wednesday:</label>
+    <select id="Wednesday-input">
+    </select>
+    <br>
+    <label for="Thursday-input">Thursday:</label>
+    <select id="Thursday-input">
+    </select>
+    <br>
+    <label for="Friday-input">Friday:</label>
+    <select id="Friday-input">
+    </select>
+    <br>
+    <button type="button" onclick="addSubjectsToTable()">Add subjects</button>
+    
+  </form>
+
+  

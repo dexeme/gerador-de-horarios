@@ -11,27 +11,11 @@ const updateTable = (subjects) => {
   }
 }
 
-const updateSelectedOptions = (subjects) => {
-  var days = ["Monday-input", "Tuesday-input", "Wednesday-input", "Thursday-input", "Friday-input"];
-  days.forEach(function(day) {
-      var select = document.getElementById(day);
-      select.innerHTML = "";
-      subjects.forEach(function(sub){
-          var option = document.createElement("option");
-          option.value = sub.name;
-          option.text = sub.name;
-          select.add(option);
-      });
-  });
-}
-
-
 const getSubjects = () => { 
   let subjects = JSON.parse(localStorage.getItem('subjects')); 
   if (subjects === null) { 
       subjects = []; 
   }
-  updateSelectedOptions(subjects);
   return subjects;
 }
 
@@ -42,6 +26,7 @@ const AddNewSubject = () => {
       value: document.getElementById("valueInput").value,
       name: document.getElementById("name").value,
       times: document.getElementById("times").value,
+      
   }
   if (subject.value === '' || subject.name === '') {
       alert('Preencha todos os campos!');
@@ -51,7 +36,6 @@ const AddNewSubject = () => {
   console.log(subject);
   localStorage.setItem('subjects', JSON.stringify(subjects));
   updateTable(subjects);
-  updateSelectedOptions(subjects);
   var days = ["Monday-input", "Tuesday-input", "Wednesday-input", "Thursday-input", "Friday-input"];
   days.forEach(function(day) {
       var select = document.getElementById(day);
@@ -80,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
 const removeExpense = (id) => { 
   subjects = subjects.filter((subject) => subject.id !== id);
   updateTable(subjects); 
-  updateSelectedOptions(subjects); 
 }
 
 
@@ -219,3 +202,64 @@ const gerarTabela = (tableId) => {
     }
   }
 };
+
+// função para exibir as disciplinas armazenadas no local storage
+function displaySubjects() {
+  // obtém os subjects do local storage
+  var subjects = JSON.parse(localStorage.getItem("subjects"));
+
+  // cria um elemento div para conter os quadrados
+  var container = document.createElement("div");
+  container.id = "subjects-container";
+
+  // para cada subject, cria um elemento div e o adiciona ao container
+  for (var i = 0; i < subjects.length; i++) {
+      var subject = subjects[i];
+      var subjectDiv = createSubjectElement(subject);
+      container.appendChild(subjectDiv);
+  }
+
+  // adiciona o container à tela
+  document.body.appendChild(container);
+}
+
+// função para adicionar uma disciplina à célula alvo
+// função para adicionar uma disciplina à célula alvo
+function addSubject(subjectName) {
+  var existingSubject = targetCell.querySelector(".subject-square");
+  if (!existingSubject) {
+      targetCell.appendChild(createSubjectElement(subjectName));
+  }
+  if (existingSubject) {
+      existingSubject.innerHTML = subjectName;
+  }
+}
+  
+
+// função para criar um elemento de disciplina
+function createSubjectElement(subject) {
+  var subjectDiv = document.createElement("div");
+  subjectDiv.classList.add("subject-square");
+  subjectDiv.innerHTML = subject.name;
+  subjectDiv.setAttribute("draggable", true);
+  subjectDiv.addEventListener("dragstart", function(event) {
+      event.dataTransfer.setData("text", subject.name);
+  });
+  return subjectDiv;
+}
+
+
+
+// seleciona a célula alvo e adiciona eventos de drag drop
+var targetCell = document.getElementById("target-cell"); 
+  targetCell.addEventListener("drop", function(event) {
+  event.preventDefault();
+  var existingSubject = targetCell.querySelector(".subject-square");
+  if (existingSubject) {
+    targetCell.removeChild(existingSubject);
+  }
+  var subjectName = event.dataTransfer.getData("text");
+  addSubject(subjectName);
+});
+
+

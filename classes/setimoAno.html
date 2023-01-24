@@ -23,40 +23,33 @@
 <!-- Link para outra página -->
 <body>
 <div class="container">
-    <h1 style="text-align:center;">Sexto Ano</h1>
+    <h1 style="text-align:center;">Sétimo Ano</h1>
     <a href="/index.html">
         <button class="btn btn-primary btn-lg">Home</button>
     </a>
-    <a href="/sextoAno.html">
+    <a href="/classes/sextoAno.html">
         <button class="btn btn-primary btn-lg">6º</button>
     </a>
-    <a href="/setimoAno.html">
+    <a href="/classes/setimoAno.html">
         <button class="btn btn-primary btn-lg">7º</button>
     </a>
-    <a href="/oitavoAno.html">
+    <a href="/classes/oitavoAno.html">
         <button class="btn btn-primary btn-lg">8º</button> 
     </a>
-    <a href="/nonoAno.html">
+    <a href="/classes/nonoAno.html">
         <button class="btn btn-primary btn-lg">9º</button>
     </a>
 </div>
 
-
-<!-- Tabela de horários -->
-
-<table id="schedule-table-sextoAno">
-    <tr>
-      <th>Segunda</th>
-      <th>Terça</th>
-      <th>Quarta</th>
-      <th>Quinta</th>
-      <th>Sexta</th>
-    </tr>
+<table id="schedule-table-setimoAno">
+      <script>
+        gerarTabela('schedule-table-setimoAno');
+    </script>
   </table>
-   
+  
   <!-- Selected subjects -->
 
-<table id="schedule-table-sextoAno" style="overflow: auto;">
+<table id="schedule-table-setimoAno" style="overflow: auto;">
     <form>
       <label for="Monday-input">Monday:</label>
       <select id="Monday-input">
@@ -78,7 +71,7 @@
       <select id="Friday-input">
       </select>
       <br>
-      <button type="button" onclick="addSubjectsToTable('schedule-table-sextoAno')">Add</button>
+      <button type="button" onclick="addSubjectsToTable('schedule-table-setimoAno')">Add</button>
       
     </form>
   

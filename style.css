@@ -9,6 +9,12 @@ table {
     margin-bottom: 50px;
 }
 
+.cell {
+    width: 20%;
+    padding: 12px;
+    text-align: center;
+}
+
 th, td {
     border: 1px solid #dddddd;
     padding: 12px;

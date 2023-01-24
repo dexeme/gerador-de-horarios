@@ -23,14 +23,14 @@
 <!-- Link para outra página -->
 <body>
 <div class="container">
-    <h1 style="text-align:center;">Sétimo Ano</h1>
+    <h1 style="text-align:center;">Sexto Ano</h1>
     <a href="/index.html">
         <button class="btn btn-primary btn-lg">Home</button>
     </a>
-    <a href="/sextoAno.html">
+    <a href="/classes/sextoAno.html">
         <button class="btn btn-primary btn-lg">6º</button>
     </a>
-    <a href="/setimoAno.html">
+    <a href="/classes/setimoAno.html">
         <button class="btn btn-primary btn-lg">7º</button>
     </a>
     <a href="/oitavoAno.html">
@@ -41,19 +41,21 @@
     </a>
 </div>
 
-<table id="schedule-table-setimoAno">
-    <tr>
-      <th>Segunda</th>
-      <th>Terça</th>
-      <th>Quarta</th>
-      <th>Quinta</th>
-      <th>Sexta</th>
-    </tr>
+
+<!-- Tabela de horários -->
+
+<table id="schedule-table-sextoAno">
+        <script>
+            gerarTabela('schedule-table-sextoAno');
+        </script>
   </table>
-  
+
+  <div id="disciplines-list">
+    <div class="discipline" draggable="true" ondragstart="dragStart(event)">Matemática</div>
+   
   <!-- Selected subjects -->
 
-<table id="schedule-table-setimoAno" style="overflow: auto;">
+<table id="schedule-table-sextoAno" style="overflow: auto;">
     <form>
       <label for="Monday-input">Monday:</label>
       <select id="Monday-input">
@@ -75,7 +77,7 @@
       <select id="Friday-input">
       </select>
       <br>
-      <button type="button" onclick="addSubjectsToTable('schedule-table-setimoAno')">Add</button>
+      <button type="button" onclick="addSubjectsToTable('schedule-table-sextoAno')">Add</button>
       
     </form>
   

@@ -40,3 +40,42 @@
         <button class="btn btn-primary btn-lg">9º</button>
     </a>
 </div>
+
+<table id="schedule-table-nonoAno">
+    <tr>
+      <th>Segunda</th>
+      <th>Terça</th>
+      <th>Quarta</th>
+      <th>Quinta</th>
+      <th>Sexta</th>
+    </tr>
+  </table>
+  
+  <!-- Selected subjects -->
+
+<table id="schedule-table-nonoAno" style="overflow: auto;">
+    <form>
+      <label for="Monday-input">Monday:</label>
+      <select id="Monday-input">
+      </select>
+      <br>
+      <label for="Tuesday-input">Tuesday:</label>
+      <select id="Tuesday-input">
+      </select>
+      <br>
+      <label for="Wednesday-input">Wednesday:</label>
+      <select id="Wednesday-input">
+      </select>
+      <br>
+      <label for="Thursday-input">Thursday:</label>
+      <select id="Thursday-input">
+      </select>
+      <br>
+      <label for="Friday-input">Friday:</label>
+      <select id="Friday-input">
+      </select>
+      <br>
+      <button type="button" onclick="addSubjectsToTable('schedule-table-nonoAno')">Add</button>
+      
+    </form>
+  

@@ -84,7 +84,7 @@ const removeExpense = (id) => {
 }
 
 
-const addSubjectsToTable = () => {
+const addSubjectsToTable = (tableId) => {
     var monday = document.getElementById("Monday-input").value;
     var tuesday = document.getElementById("Tuesday-input").value;
     var wednesday = document.getElementById("Wednesday-input").value;
@@ -92,7 +92,7 @@ const addSubjectsToTable = () => {
     var friday = document.getElementById("Friday-input").value;
 
 
-    var scheduleTable = document.getElementById("schedule-table");
+    var scheduleTable = document.getElementById(tableId);
     var newRow = scheduleTable.insertRow();
 
       if (scheduleTable.rows.length > 5) { // Verify if the table has the limit of 4 rows
@@ -104,8 +104,8 @@ const addSubjectsToTable = () => {
           alert("Please fill all the fields");
           return;
       }
-  
-    
+
+
   var mondayCell = newRow.insertCell(0);
   var tuesdayCell = newRow.insertCell(1);
   var wednesdayCell = newRow.insertCell(2);
@@ -124,4 +124,74 @@ const addSubjectsToTable = () => {
   fridayCell.innerHTML = friday;
   
   }
+
+
+
+// Função para salvar os dados da tabela no armazenamento local
+var tablesData = {
+    "schedule-table-sextoAno": {
+      id: "schedule-table-sextoAno",
+      data: []
+    },
+    "schedule-table-setimoAno": {
+      id: "schedule-table-setimoAno",
+      data: []
+    },
+    "schedule-table-oitavoAno": {
+      id: "schedule-table-oitavoAno",
+      data: []
+    },
+    "schedule-table-nonoAno": {
+      id: "schedule-table-nonoAno",
+      data: []
+    }
+  }
+  
+  // Função para salvar os dados da tabela no armazenamento local
+  function saveTableData(tableId) {
+    var table = document.getElementById(tableId);
+    var rows = table.rows;
+    var data = [];
+    for (var i = 1; i < rows.length; i++) {
+      var cells = rows[i].cells;
+      data[i-1] = {};
+      for (var j = 0; j < cells.length; j++) {
+        data[i-1][j] = cells[j].innerHTML;
+      }
+    }
+    tablesData[tableId].data = data;
+    localStorage.setItem("tablesData", JSON.stringify(tablesData));
+  }
+  
+  // Função para recuperar os dados da tabela do armazenamento local
+  function loadTableData(tableId) {
+    var tablesData = JSON.parse(localStorage.getItem("tablesData"));
+    var data = tablesData[tableId].data;
+    if (data !== null) {
+      var table = document.getElementById(tableId);
+      for (var i = 0; i < data.length; i++) {
+        var row = table.insertRow(i+1);
+        for (var j = 0; j < 5; j++) {
+          var cell = row.insertCell(j);
+          cell.innerHTML = data[i][j];
+        }
+      }
+    }
+}
+  
+// Toda a vez que eu mudar de aba, salvo os dados da tabela
+window.onblur = function() {
+    saveTableData("schedule-table-sextoAno");
+    saveTableData("schedule-table-setimoAno");
+    saveTableData("schedule-table-oitavoAno");
+    saveTableData("schedule-table-nonoAno");
+}
+
+// Quando eu carregar a página, carrego os dados da tabela
+window.onload = function() {
+    loadTableData("schedule-table-sextoAno");
+    loadTableData("schedule-table-setimoAno");
+    loadTableData("schedule-table-oitavoAno");
+    loadTableData("schedule-table-nonoAno");
+}
 

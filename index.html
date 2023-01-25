@@ -79,21 +79,31 @@
 <div class="action">
     <span id="main-button">+</span>
     <ul id="sub-buttons">
-        <li><img src='./icons/notes.png' width="25px" datalink='./classes/sextoAno.html'>Share on Facebook</li>
-        <li><img src='./icons/notes.png' width="25px" datalink='./classes/setimoAno.html'>Share on Twitter</li>
-        <li><img src='./icons/notes.png' width="25px" datalink='./classes/oitavoAno.html'>Share on LinkedIn</li>
-        <li><img src='./icons/notes.png' width="25px" datalink='./classes/nonoAno.html'>Share on WhatsApp</li>
+        <li datalink='./classes/cadastroDisciplinas.html' ><img src='./icons/notes.png' width="25px">Cadastre Disciplinas</li>
+        <li datalink='./classes/sextoAno.html' ><img src='./icons/notes.png' width="25px">Sexto Ano</li>
+        <li datalink='./classes/setimoAno.html' ><img src='./icons/notes.png' width="25px">Sétimo Ano</li>
+        <li datalink='./classes/oitavoAno.html' ><img src='./icons/notes.png' width="25px">Oitavo Ano</li>
+        <li datalink='./classes/nonoAno.html' ><img src='./icons/notes.png' width="25px">Nono Ano</li>
     </ul>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll('sub-buttons');
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function() {
-            console.log(this.getAttribute('datalink'));
+    buttons = document.querySelectorAll('#sub-buttons li');
+    console.log(buttons)
+    mainButton = document.querySelector('#main-button');
+    mainButton.addEventListener('click', function() {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.toggle('show');
+        }
+    });
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', e => {
+           link = e.currentTarget.getAttribute('datalink');
+           console.log(link)
+           window.open(link);
+            
         });
-    }
-    
-});
+    });
+
 </script>

@@ -176,6 +176,7 @@ function loadTableData(tableId) {
 }
 
 const dragStart = (event) => {
+  event.preventDefault();
   event.dataTransfer.setData("text", event.target.id);
 }
 
@@ -270,18 +271,19 @@ function createSubjectElement(subject) {
   subjectDiv.addEventListener("dragstart", function(event) {
       console.log('dragstart', subject.name, event.dataTransfer.getData("text"));
       event.dataTransfer.setData("text", subject.name);});
-  subjectDiv.addEventListener("dragend", function(event) {
-      var targetCell = document.getElementById("target-cell");
+      subjectDiv.addEventListener("dragend", function(event) {
+        var targetCell = document.getElementById("target-cell");
+        
+        if (subject.value > 1) {
+        event.preventDefault();
 
-      if (subject.value > 1) {
-        e.preventDefault();
         console.log('bigger than zero');
-
+        
         subject.value = subject.value - 1;
 
-        localStorage.setItem('subjects', JSON.stringify(subjects));
-
         subjectDiv.innerHTML = subject.name + " " + subject.value;
+        
+        localStorage.setItem('subjects', JSON.stringify(subjects));
 
         console.log(subject.value);
 
@@ -290,7 +292,6 @@ function createSubjectElement(subject) {
         targetCell.appendChild(createSubjectElement(subject));
       }
       else {
-        e.preventDefault();
         console.log('less than zero');
         subject.value = 0;
         event.target.remove();

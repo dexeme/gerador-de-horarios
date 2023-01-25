@@ -75,3 +75,25 @@
         </div>
 </form>
 
+
+<div class="action">
+    <span id="main-button">+</span>
+    <ul id="sub-buttons">
+        <li><img src='./icons/notes.png' width="25px" datalink='./classes/sextoAno.html'>Share on Facebook</li>
+        <li><img src='./icons/notes.png' width="25px" datalink='./classes/setimoAno.html'>Share on Twitter</li>
+        <li><img src='./icons/notes.png' width="25px" datalink='./classes/oitavoAno.html'>Share on LinkedIn</li>
+        <li><img src='./icons/notes.png' width="25px" datalink='./classes/nonoAno.html'>Share on WhatsApp</li>
+    </ul>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll('sub-buttons');
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            console.log(this.getAttribute('datalink'));
+        });
+    }
+    
+});
+</script>

@@ -268,38 +268,53 @@ function createSubjectElement(subject) {
   subjectDiv.innerHTML = subject.name + " " + subject.value;
   subjectDiv.setAttribute("draggable", true);
   subjectDiv.addEventListener("dragstart", function(event) {
-      // clear the target cell
-      event.dataTransfer.setData("text", subject.name);
-      // set the data to be the subject name
-    });
-    
-    return subjectDiv;
-  }
-  
-  
-  
-  // seleciona a célula alvo e adiciona eventos de drag drop
-  var targetCell = document.getElementById("target-cell"); 
+      console.log('dragstart', subject.name, event.dataTransfer.getData("text"));
+      event.dataTransfer.setData("text", subject.name);});
+  subjectDiv.addEventListener("dragend", function(event) {
+      var targetCell = document.getElementById("target-cell");
 
-  targetCell.addEventListener("drop", function(event) {
-    event.preventDefault();
-    decrementValue(event.dataTransfer.getData("text"));
-    var existingSubject = targetCell.querySelector(".subject-square");
-    if (existingSubject) {
-      targetCell.removeChild(existingSubject);
-      decrementValue(existingSubject.id);
-    }    
-    var subjectName = event.dataTransfer.getData("text");
-    addSubject(subjectName);
-    decrementValue(subjectName.id);
+      if (subject.value > 1) {
+        e.preventDefault();
+        console.log('bigger than zero');
+
+        subject.value = subject.value - 1;
+
+        localStorage.setItem('subjects', JSON.stringify(subjects));
+
+        subjectDiv.innerHTML = subject.name + " " + subject.value;
+
+        console.log(subject.value);
+
+        targetCell.innerHTML = "";
+
+        targetCell.appendChild(createSubjectElement(subject));
+      }
+      else {
+        e.preventDefault();
+        console.log('less than zero');
+        subject.value = 0;
+        event.target.remove();
+
+        localStorage.setItem('subjects', JSON.stringify(subjects));
+
+        updateTable(subject);
+
+      console.log(subject.value);
+
+      targetCell.innerHTML = "";
+
+      targetCell.appendChild(createSubjectElement(subject));
+      }
   });
-  
+  return subjectDiv;
+}
 
 
 const addSubjectToTable = (event) => {
   event.preventDefault();
   let id = event.dataTransfer.getData("text");
   let subject = subjects.find(subject => subject.id === id);
+  
   localStorage.setItem('subjects', JSON.stringify(subjects));
   updateTable(subject);
 
@@ -325,6 +340,7 @@ function updateValues() {
     }
     
     // atualiza o "value" da disciplina
+    console.log(subject.name, subject.value, count)
     subject.value = count;
   }
 }

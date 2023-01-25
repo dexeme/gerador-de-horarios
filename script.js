@@ -1,84 +1,83 @@
-
-const updateTable = (subjects) => { 
-  let table = document.getElementById('data-output');
+const updateTable = (subjects) => {
+  let table = document.getElementById("data-output");
   table.innerHTML = "";
-  for (let subject of subjects) { 
-      let row = document.createElement('tr');
-      row.innerHTML = `
+  for (let subject of subjects) {
+    let row = document.createElement("tr");
+    row.innerHTML = `
       <td>${subject.value}</td>
       <td>${subject.name}</td>
       <td>${subject.times}</td>
       `;
-      let btn = document.createElement("BUTTON");
-      btn.innerHTML = "Delete";
-      btn.classList.add("delete-btn");
-      btn.addEventListener("click", function() {
-        deleteSubject(subject.id);
-        row.remove();
-      });
-      row.appendChild(btn);
-      table.appendChild(row);
+    let btn = document.createElement("BUTTON");
+    btn.innerHTML = "Delete";
+    btn.classList.add("delete-btn");
+    btn.addEventListener("click", function () {
+      deleteSubject(subject.id);
+      row.remove();
+    });
+    row.appendChild(btn);
+    table.appendChild(row);
   }
-}
+};
 
-
-
-const getSubjects = () => { 
-  let subjects = JSON.parse(localStorage.getItem('subjects')); 
-  if (subjects === null) { 
-      subjects = []; 
+const getSubjects = () => {
+  let subjects = JSON.parse(localStorage.getItem("subjects"));
+  if (subjects === null) {
+    subjects = [];
   }
   return subjects;
-}
+};
 
 let subjects = [];
 const AddNewSubject = () => {
   const subject = {
-      id: Date.now(),
-      value: document.getElementById("valueInput").value,
-      name: document.getElementById("name").value,
-      times: document.getElementById("times").value,
-      
-  }
-  if (subject.value === '' || subject.name === '') {
-      alert('Preencha todos os campos!');
-      return;
+    id: Date.now(),
+    value: document.getElementById("valueInput").value,
+    name: document.getElementById("name").value,
+    times: document.getElementById("times").value,
+  };
+  if (subject.value === "" || subject.name === "") {
+    alert("Preencha todos os campos!");
+    return;
   }
   subjects.push(subject);
   console.log(subject);
-  localStorage.setItem('subjects', JSON.stringify(subjects));
+  localStorage.setItem("subjects", JSON.stringify(subjects));
   updateTable(subjects);
-  var days = ["Monday-input", "Tuesday-input", "Wednesday-input", "Thursday-input", "Friday-input"];
-  days.forEach(function(day) {
-      var select = document.getElementById(day);
-      select.innerHTML = "";
-      subjects.forEach(function(sub){
-          var option = document.createElement("option");
-          option.value = sub.name;
-          option.text = sub.name;
-          select.add(option);
-      });
+  var days = [
+    "Monday-input",
+    "Tuesday-input",
+    "Wednesday-input",
+    "Thursday-input",
+    "Friday-input",
+  ];
+  days.forEach(function (day) {
+    var select = document.getElementById(day);
+    select.innerHTML = "";
+    subjects.forEach(function (sub) {
+      var option = document.createElement("option");
+      option.value = sub.name;
+      option.text = sub.name;
+      select.add(option);
+    });
   });
   document.forms[0].reset();
   document.forms[1].reset();
-}
+};
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   subjects = getSubjects();
   updateTable(subjects);
-  document.getElementById('btn').addEventListener('click', AddNewSubject);
-  document.getElementById('btn2').addEventListener('click', console.log('cu'));
-  document.getElementById('btn3').addEventListener('click', localStorage.clear);
+  document.getElementById("btn").addEventListener("click", AddNewSubject);
+  document.getElementById("btn2").addEventListener("click", console.log("cu"));
+  document.getElementById("btn3").addEventListener("click", localStorage.clear);
 });
 
-
-
 const deleteSubject = (id) => {
-  subjects = subjects.filter(subject => subject.id !== id);
-  localStorage.setItem('subjects', JSON.stringify(subjects));
+  subjects = subjects.filter((subject) => subject.id !== id);
+  localStorage.setItem("subjects", JSON.stringify(subjects));
   updateTable(subjects);
-}
-
+};
 
 const addSubjectsToTable = (tableId) => {
   var monday = document.getElementById("Monday-input").value;
@@ -87,61 +86,63 @@ const addSubjectsToTable = (tableId) => {
   var thursday = document.getElementById("Thursday-input").value;
   var friday = document.getElementById("Friday-input").value;
 
-
   var scheduleTable = document.getElementById(tableId);
   var newRow = scheduleTable.insertRow();
 
-    if (scheduleTable.rows.length > 5) { // Verify if the table has the limit of 4 rows
-        alert("You can only add 4 subjects");
-        return;
-    }
-    // Verify if has empty fields
-    if (monday == "" || tuesday == "" || wednesday == "" || thursday == "" || friday == "") {
-        alert("Please fill all the fields");
-        return;
-    }
+  if (scheduleTable.rows.length > 5) {
+    // Verify if the table has the limit of 4 rows
+    alert("You can only add 4 subjects");
+    return;
+  }
+  // Verify if has empty fields
+  if (
+    monday == "" ||
+    tuesday == "" ||
+    wednesday == "" ||
+    thursday == "" ||
+    friday == ""
+  ) {
+    alert("Please fill all the fields");
+    return;
+  }
 
-
-var mondayCell = newRow.insertCell(0);
-var tuesdayCell = newRow.insertCell(1);
-var wednesdayCell = newRow.insertCell(2);
-var thursdayCell = newRow.insertCell(3);
-var fridayCell = newRow.insertCell(4);
-var btn = document.createElement("BUTTON");
-btn.innerHTML = "Delete";
-btn.addEventListener("click", function() {
-newRow.remove();
-});
-newRow.appendChild(btn);
-mondayCell.innerHTML = monday;
-tuesdayCell.innerHTML = tuesday;
-wednesdayCell.innerHTML = wednesday;
-thursdayCell.innerHTML = thursday;
-fridayCell.innerHTML = friday;
-
-}
-
-
+  var mondayCell = newRow.insertCell(0);
+  var tuesdayCell = newRow.insertCell(1);
+  var wednesdayCell = newRow.insertCell(2);
+  var thursdayCell = newRow.insertCell(3);
+  var fridayCell = newRow.insertCell(4);
+  var btn = document.createElement("BUTTON");
+  btn.innerHTML = "Delete";
+  btn.addEventListener("click", function () {
+    newRow.remove();
+  });
+  newRow.appendChild(btn);
+  mondayCell.innerHTML = monday;
+  tuesdayCell.innerHTML = tuesday;
+  wednesdayCell.innerHTML = wednesday;
+  thursdayCell.innerHTML = thursday;
+  fridayCell.innerHTML = friday;
+};
 
 // Função para salvar os dados da tabela no armazenamento local
 var tablesData = {
   "schedule-table-sextoAno": {
     id: "schedule-table-sextoAno",
-    data: []
+    data: [],
   },
   "schedule-table-setimoAno": {
     id: "schedule-table-setimoAno",
-    data: []
+    data: [],
   },
   "schedule-table-oitavoAno": {
     id: "schedule-table-oitavoAno",
-    data: []
+    data: [],
   },
   "schedule-table-nonoAno": {
     id: "schedule-table-nonoAno",
-    data: []
-  }
-}
+    data: [],
+  },
+};
 
 // Função para salvar os dados da tabela no armazenamento local
 function saveTableData(tableId) {
@@ -150,9 +151,9 @@ function saveTableData(tableId) {
   var data = [];
   for (var i = 1; i < rows.length; i++) {
     var cells = rows[i].cells;
-    data[i-1] = {};
+    data[i - 1] = {};
     for (var j = 0; j < cells.length; j++) {
-      data[i-1][j] = cells[j].innerHTML;
+      data[i - 1][j] = cells[j].innerHTML;
     }
   }
   tablesData[tableId].data = data;
@@ -166,7 +167,7 @@ function loadTableData(tableId) {
   if (data !== null) {
     var table = document.getElementById(tableId);
     for (var i = 0; i < data.length; i++) {
-      var row = table.insertRow(i+1);
+      var row = table.insertRow(i + 1);
       for (var j = 0; j < 5; j++) {
         var cell = row.insertCell(j);
         cell.innerHTML = data[i][j];
@@ -178,11 +179,11 @@ function loadTableData(tableId) {
 const dragStart = (event) => {
   event.preventDefault();
   event.dataTransfer.setData("text", event.target.id);
-}
+};
 
 const dragOver = (event) => {
   event.preventDefault();
-}
+};
 
 const drop = (event) => {
   event.preventDefault();
@@ -194,11 +195,11 @@ const drop = (event) => {
 const gerarTabela = (tableId) => {
   const table = document.getElementById(tableId);
 
-  if(table.rows.length > 1 && table.rows[0].cells.length > 0) return;
+  if (table.rows.length > 1 && table.rows[0].cells.length > 0) return;
 
-  const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
-  const hours = ['8:00', '8:45', '9:30', '10:15', '11:00'];
-  
+  const days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
+  const hours = ["8:00", "8:45", "9:30", "10:15", "11:00"];
+
   // Create 6 rows
   for (let i = 0; i < 6; i++) {
     const row = table.insertRow();
@@ -207,23 +208,21 @@ const gerarTabela = (tableId) => {
       const cell = row.insertCell();
       if (j === 0) {
         cell.setAttribute("draggable", "false");
-      }
-      else{
+      } else {
         cell.setAttribute("ondragover", "dragOver(event)");
         cell.setAttribute("ondrop", "drop(event)");
       }
-      
+
       if (i === 0 && j > 0) {
-        cell.innerHTML = days[j-1]; //put the day in the first row
+        cell.innerHTML = days[j - 1]; //put the day in the first row
       }
       if (j === 0 && i > 0) {
-        cell.innerHTML = hours[i-1]; //put the hour in the first col
+        cell.innerHTML = hours[i - 1]; //put the hour in the first col
       }
     }
   }
 };
-``
-
+``;
 
 // função para exibir as disciplinas armazenadas no local storage
 function displaySubjects() {
@@ -236,9 +235,9 @@ function displaySubjects() {
 
   // para cada subject, cria um elemento div e o adiciona ao container
   for (var i = 0; i < subjects.length; i++) {
-      var subject = subjects[i];
-      var subjectDiv = createSubjectElement(subject);
-      container.appendChild(subjectDiv);
+    var subject = subjects[i];
+    var subjectDiv = createSubjectElement(subject);
+    container.appendChild(subjectDiv);
   }
 
   // adiciona o container à tela
@@ -250,17 +249,16 @@ function displaySubjects() {
 function addSubject(subjectName) {
   // obtém a célula alvo
   var targetCell = document.getElementById("target-cell");
- // limpa a célula alvo
+  // limpa a célula alvo
   targetCell.innerHTML = "";
   var existingSubject = targetCell.querySelector(".subject-square");
   if (!existingSubject) {
-      targetCell.appendChild(createSubjectElement(subjectName));
+    targetCell.appendChild(createSubjectElement(subjectName));
   }
   if (existingSubject) {
-      existingSubject.innerHTML = subjectName;
+    existingSubject.innerHTML = subjectName;
   }
 }
-  
 
 // função para criar um elemento de disciplina
 function createSubjectElement(subject) {
@@ -268,70 +266,67 @@ function createSubjectElement(subject) {
   subjectDiv.classList.add("subject-square");
   subjectDiv.innerHTML = subject.name + " " + subject.value;
   subjectDiv.setAttribute("draggable", true);
-  subjectDiv.addEventListener("dragstart", function(event) {
-      console.log('dragstart', subject.name, event.dataTransfer.getData("text"));
-      event.dataTransfer.setData("text", subject.name);});
-      subjectDiv.addEventListener("dragend", function(event) {
-        var targetCell = document.getElementById("target-cell");
-        
-        if (subject.value > 1) {
-        event.preventDefault();
+  subjectDiv.addEventListener("dragstart", function (event) {
+    event.dataTransfer.setData("text", subject.name);
+  });
+  var targetCell = document.getElementById("target-cell");
+  subjectDiv.addEventListener("dragend", function (event) {
+    if (subject.value > 1) {
+      event.preventDefault();
 
-        console.log('bigger than zero');
-        
-        subject.value = subject.value - 1;
+      console.log("bigger than zero");
 
-        subjectDiv.innerHTML = subject.name + " " + subject.value;
-        
-        localStorage.setItem('subjects', JSON.stringify(subjects));
+      subject.value = subject.value - 1;
 
-        console.log(subject.value);
+      subjectDiv.innerHTML = subject.name + " " + subject.value;
 
-        targetCell.innerHTML = "";
-
-        targetCell.appendChild(createSubjectElement(subject));
-      }
-      else {
-        console.log('less than zero');
-        subject.value = 0;
-        event.target.remove();
-
-        localStorage.setItem('subjects', JSON.stringify(subjects));
-
-        updateTable(subject);
+      localStorage.setItem("subjects", JSON.stringify(subjects));
 
       console.log(subject.value);
 
       targetCell.innerHTML = "";
 
       targetCell.appendChild(createSubjectElement(subject));
-      }
+    } else {
+      console.log("less than zero");
+      subject.value = 0;
+      subjectDiv.innerHTML = subject.name + " " + subject.value;
+
+      subjectDiv.style.backgroundColor = "lightgray";
+      subjectDiv.style.border = "1px solid gray";
+      subjectDiv.style.cursor = "not-allowed";
+      subjectDiv.setAttribute("draggable", false);
+      localStorage.setItem("subjects", JSON.stringify(subjects));
+
+      updateTable(subject);
+      console.log(subject.value);
+
+      targetCell.innerHTML = "";
+
+      targetCell.appendChild(createSubjectElement(subject));
+    }
   });
   return subjectDiv;
 }
 
-
 const addSubjectToTable = (event) => {
   event.preventDefault();
   let id = event.dataTransfer.getData("text");
-  let subject = subjects.find(subject => subject.id === id);
-  
-  localStorage.setItem('subjects', JSON.stringify(subjects));
+  let subject = subjects.find((subject) => subject.id === id);
+
+  localStorage.setItem("subjects", JSON.stringify(subjects));
   updateTable(subject);
-
-}
-
-
+};
 
 function updateValues() {
   // obtém todos os elementos da tabela
   const tableElements = document.querySelectorAll("#tableId .subject-square");
-  
+
   // para cada elemento
   for (const element of tableElements) {
     // encontra a disciplina correspondente
-    const subject = subjects.find(subject => subject.id === element.id);
-    
+    const subject = subjects.find((subject) => subject.id === element.id);
+
     // conta quantas vezes a disciplina aparece na tabela
     let count = 0;
     for (const el of tableElements) {
@@ -339,13 +334,12 @@ function updateValues() {
         count++;
       }
     }
-    
+
     // atualiza o "value" da disciplina
-    console.log(subject.name, subject.value, count)
+    console.log(subject.name, subject.value, count);
     subject.value = count;
   }
 }
-
 
 // função para atualizar a tabela
 function updateSubjectValue(subjects) {
@@ -359,19 +353,19 @@ function updateSubjectValue(subjects) {
       var subject = cell.querySelector(".subject-square");
       if (subject) {
         var subjectName = subject.innerHTML;
-        let subject = subjects.find(subject => subject.name === subjectName);
+        let subject = subjects.find((subject) => subject.name === subjectName);
         subject.value = subject.value - 1;
       }
     }
   }
-  localStorage.setItem('subjects', JSON.stringify(subjects));
+  localStorage.setItem("subjects", JSON.stringify(subjects));
   displaySubjects();
 }
 
 const decrementValue = (id) => {
-  console.log('decrementValue called with id:', id);
-  let subject = subjects.find(subject => subject.id === id);
+  console.log("decrementValue called with id:", id);
+  let subject = subjects.find((subject) => subject.id === id);
   subject.value--;
-  localStorage.setItem('subjects', JSON.stringify(subjects));
+  localStorage.setItem("subjects", JSON.stringify(subjects));
   updateTable(subjects);
-}
+};

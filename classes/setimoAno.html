@@ -17,29 +17,11 @@
 
 <!-- Page Title -->
 
-<title>GERADOR DE HORÁRIOS</title>
+<title>SETIMO ANO</title>
 
 
 <!-- Link para outra página -->
 <body>
-    <div class="container">
-        <h1 style="text-align:center;">Sétimo Ano</h1>
-        <a href="/index.html">
-            <button class="btn btn-primary btn-lg">Home</button>
-        </a>
-        <a href="/classes/sextoAno.html">
-            <button class="btn btn-primary btn-lg">6º</button>
-        </a>
-        <a href="/classes/setimoAno.html">
-            <button class="btn btn-primary btn-lg">7º</button>
-        </a>
-        <a href="/classes/oitavoAno.html">
-            <button class="btn btn-primary btn-lg">8º</button> 
-        </a>
-        <a href="/classes/nonoAno.html">
-            <button class="btn btn-primary btn-lg">9º</button>
-        </a>
-    </div>
 
 <table id="schedule-table-setimoAno">
       <script>
@@ -52,15 +34,13 @@
   <div class="action">
     <span id="main-button">+</span>
     <ul id="sub-buttons">
-        <li datalink='./classes/cadastroDisciplinas.html' ><img src='./icons/notes.png' width="25px">Cadastre Disciplinas</li>
-        <li datalink='./classes/sextoAno.html' ><img src='./icons/notes.png' width="25px">Sexto Ano</li>
-        <li datalink='./classes/setimoAno.html' ><img src='./icons/notes.png' width="25px">Sétimo Ano</li>
-        <li datalink='./classes/oitavoAno.html' ><img src='./icons/notes.png' width="25px">Oitavo Ano</li>
-        <li datalink='./classes/nonoAno.html' ><img src='./icons/notes.png' width="25px">Nono Ano</li>
+        <li datalink='../index.html' ><img src='../icons/notes.png' width="25px">Cadastre Disciplinas</li>
+        <li datalink='nonoAno.html' ><img src='../icons/nine.png' width="25px">Nono Ano</li>
+        <li datalink='oitavoAno.html' ><img src='../icons/eight.png' width="25px">Oitavo Ano</li>
+        <li datalink='setimoAno.html' ><img src='../icons/seven.png' width="25px">Sétimo Ano</li>
+        <li datalink='sextoAno.html' ><img src='../icons/six.png' width="25px">Sexto Ano</li>
     </ul>
 </div>
-
-
 
   
 <script>
@@ -77,7 +57,7 @@
         button.addEventListener('click', e => {
            link = e.currentTarget.getAttribute('datalink');
            console.log(link)
-           window.open(link);
+           window.open(link, "_self");
             
         });
     });

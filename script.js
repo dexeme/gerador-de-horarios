@@ -1,5 +1,7 @@
 
 const updateTable = (subjects) => { 
+  let table = document.getElementById('data-output');
+  table.innerHTML = "";
   for (let subject of subjects) { 
       let row = document.createElement('tr');
       row.innerHTML = `
@@ -7,9 +9,19 @@ const updateTable = (subjects) => {
       <td>${subject.name}</td>
       <td>${subject.times}</td>
       `;
-      document.getElementById('data-output').appendChild(row); // Add row to table
+      let btn = document.createElement("BUTTON");
+      btn.innerHTML = "Delete";
+      btn.classList.add("delete-btn");
+      btn.addEventListener("click", function() {
+        deleteSubject(subject.id);
+        row.remove();
+      });
+      row.appendChild(btn);
+      table.appendChild(row);
   }
 }
+
+
 
 const getSubjects = () => { 
   let subjects = JSON.parse(localStorage.getItem('subjects')); 
@@ -61,9 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-const removeExpense = (id) => { 
-  subjects = subjects.filter((subject) => subject.id !== id);
-  updateTable(subjects); 
+const deleteSubject = (id) => {
+  subjects = subjects.filter(subject => subject.id !== id);
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+  updateTable(subjects);
 }
 
 
@@ -191,8 +204,14 @@ const gerarTabela = (tableId) => {
     // Create 6 cells in each row
     for (let j = 0; j < 6; j++) {
       const cell = row.insertCell();
-      cell.setAttribute("ondragover", "dragOver(event)");
-      cell.setAttribute("ondrop", "drop(event)");
+      if (j === 0) {
+        cell.setAttribute("draggable", "false");
+      }
+      else{
+        cell.setAttribute("ondragover", "dragOver(event)");
+        cell.setAttribute("ondrop", "drop(event)");
+      }
+      
       if (i === 0 && j > 0) {
         cell.innerHTML = days[j-1]; //put the day in the first row
       }
@@ -202,6 +221,8 @@ const gerarTabela = (tableId) => {
     }
   }
 };
+``
+
 
 // função para exibir as disciplinas armazenadas no local storage
 function displaySubjects() {
@@ -226,6 +247,10 @@ function displaySubjects() {
 // função para adicionar uma disciplina à célula alvo
 // função para adicionar uma disciplina à célula alvo
 function addSubject(subjectName) {
+  // obtém a célula alvo
+  var targetCell = document.getElementById("target-cell");
+ // limpa a célula alvo
+  targetCell.innerHTML = "";
   var existingSubject = targetCell.querySelector(".subject-square");
   if (!existingSubject) {
       targetCell.appendChild(createSubjectElement(subjectName));
@@ -240,26 +265,96 @@ function addSubject(subjectName) {
 function createSubjectElement(subject) {
   var subjectDiv = document.createElement("div");
   subjectDiv.classList.add("subject-square");
-  subjectDiv.innerHTML = subject.name;
+  subjectDiv.innerHTML = subject.name + " " + subject.value;
   subjectDiv.setAttribute("draggable", true);
   subjectDiv.addEventListener("dragstart", function(event) {
+      // clear the target cell
       event.dataTransfer.setData("text", subject.name);
+      // set the data to be the subject name
+    });
+    
+    return subjectDiv;
+  }
+  
+  
+  
+  // seleciona a célula alvo e adiciona eventos de drag drop
+  var targetCell = document.getElementById("target-cell"); 
+
+  targetCell.addEventListener("drop", function(event) {
+    event.preventDefault();
+    decrementValue(event.dataTransfer.getData("text"));
+    var existingSubject = targetCell.querySelector(".subject-square");
+    if (existingSubject) {
+      targetCell.removeChild(existingSubject);
+      decrementValue(existingSubject.id);
+    }    
+    var subjectName = event.dataTransfer.getData("text");
+    addSubject(subjectName);
+    decrementValue(subjectName.id);
   });
-  return subjectDiv;
+  
+
+
+const addSubjectToTable = (event) => {
+  event.preventDefault();
+  let id = event.dataTransfer.getData("text");
+  let subject = subjects.find(subject => subject.id === id);
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+  updateTable(subject);
+
 }
 
 
 
-// seleciona a célula alvo e adiciona eventos de drag drop
-var targetCell = document.getElementById("target-cell"); 
-  targetCell.addEventListener("drop", function(event) {
-  event.preventDefault();
-  var existingSubject = targetCell.querySelector(".subject-square");
-  if (existingSubject) {
-    targetCell.removeChild(existingSubject);
+function updateValues() {
+  // obtém todos os elementos da tabela
+  const tableElements = document.querySelectorAll("#tableId .subject-square");
+  
+  // para cada elemento
+  for (const element of tableElements) {
+    // encontra a disciplina correspondente
+    const subject = subjects.find(subject => subject.id === element.id);
+    
+    // conta quantas vezes a disciplina aparece na tabela
+    let count = 0;
+    for (const el of tableElements) {
+      if (el.id === subject.id) {
+        count++;
+      }
+    }
+    
+    // atualiza o "value" da disciplina
+    subject.value = count;
   }
-  var subjectName = event.dataTransfer.getData("text");
-  addSubject(subjectName);
-});
+}
 
 
+// função para atualizar a tabela
+function updateSubjectValue(subjects) {
+  // obtém a tabela
+  var table = document.getElementById("table");
+
+  // percorre cada célula da tabela
+  for (var i = 0; i < table.rows.length; i++) {
+    for (var j = 0; j < table.rows[i].cells.length; j++) {
+      var cell = table.rows[i].cells[j];
+      var subject = cell.querySelector(".subject-square");
+      if (subject) {
+        var subjectName = subject.innerHTML;
+        let subject = subjects.find(subject => subject.name === subjectName);
+        subject.value = subject.value - 1;
+      }
+    }
+  }
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+  displaySubjects();
+}
+
+const decrementValue = (id) => {
+  console.log('decrementValue called with id:', id);
+  let subject = subjects.find(subject => subject.id === id);
+  subject.value--;
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+  updateTable(subjects);
+}

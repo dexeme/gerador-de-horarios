@@ -24,6 +24,19 @@ const updateSubjectsTable = (subjects) => {
     table.appendChild(row);
   }
 };
+// ======= UPDATE THE SUBJECTS VALUES ======= //
+function countSubjectOccurrences(subjectName) {
+  let count = 0;
+  const table = document.getElementById("schedule-table");
+  for (let i = 1; i < table.rows.length; i++) {
+    for (let j = 1; j < table.rows[i].cells.length; j++) {
+      if (table.rows[i].cells[j].innerHTML === subjectName) {
+        count++;
+      }
+    }
+  }
+  return count;
+}
 
 // ======= GET SUBJECTS FROM LOCAL STORAGE ======= //
 const getSubjects = () => {
@@ -108,53 +121,43 @@ function createSubjectElement(subject) {
   subjectDiv.innerHTML = subject.name + " " + subject.value;
   subjectDiv.setAttribute("draggable", true);
   subjectDiv.addEventListener("dragstart", function (event) {
-    event.dataTransfer.setData("text", subject.name);
+    event.dataTransfer.setData("name", subject.name);
+    event.dataTransfer.setData("value", subject.value);
   });
   var targetCell = document.getElementById("target-cell");
   subjectDiv.addEventListener("dragend", function (event) {
-    if (subject.value > 1) {
-      event.preventDefault();
-
-      console.log("bigger than zero");
-
-      subject.value = subject.value - 1;
-
-      subjectDiv.innerHTML = subject.name + " " + subject.value;
-
-      localStorage.setItem("subjects", JSON.stringify(subjects));
-
-      console.log(subject.value);
-
-      targetCell.innerHTML = "";
-
-      targetCell.appendChild(createSubjectElement(subject));
-    } else {
-      console.log("less than zero");
-      subject.value = 0;
-      subjectDiv.innerHTML = subject.name + " " + subject.value;
-
-      subjectDiv.style.backgroundColor = "lightgray";
-      subjectDiv.style.border = "1px solid gray";
-      subjectDiv.style.cursor = "not-allowed";
-      subjectDiv.setAttribute("draggable", false);
-      localStorage.setItem("subjects", JSON.stringify(subjects));
-
-      updateSubjectsTable(subject);
-      console.log(subject.value);
-
-      targetCell.innerHTML = "";
-
-      targetCell.appendChild(createSubjectElement(subject));
-    }
+    targetCell.innerHTML = "";
   });
   return subjectDiv;
 }
 
 // ======= DECREMENT -1 OF SUBJECT VALUE ======= //
-const decrementValue = (id) => {
-  console.log("decrementValue called with id:", id);
-  let subject = subjects.find((subject) => subject.id === id);
-  subject.value--;
-  localStorage.setItem("subjects", JSON.stringify(subjects));
-  updateSubjectsTable(subjects);
+const decrementValue = (subjectName) => {
+  console.log("decrementValue called with name:", subjectName);
+  let subject = subjects.find((subject) => subject.name === subjectName);
+  subject.value = subject.value - 1;
+  console.log("new value for the subject", subjectName, "é" + subject.value);
+  // localStorage.setItem("subjects", JSON.stringify(subjects));
+  //updateSubjectsTable(subjects);
+  return subject.value;
 };
+
+const incrementValue = (subjectName) => {
+  console.log("incrementValue called with name:", subjectName);
+  let subject = subjects.find((subject) => subject.name === subjectName);
+  subject.value = subject.value + 1;
+  console.log("new value for the subject", subjectName, "é" + subject.value);
+  //localStorage.setItem("subjects", JSON.stringify(subjects));
+  // updateSubjectsTable(subjects);
+  return subject.value;
+};
+
+function updateAllSubjectSquares() {
+  var subjectSquares = document.getElementsByClassName("subject-square");
+  for (var i = 0; i < subjectSquares.length; i++) {
+    var subjectSquare = subjectSquares[i];
+    // Aqui você pode atualizar cada elemento como desejar
+    // Exemplo:
+    subjectSquare.innerHTML = subjects[i].name + " " + subjects[i].value;
+  }
+}

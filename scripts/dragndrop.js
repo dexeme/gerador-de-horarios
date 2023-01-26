@@ -2,7 +2,6 @@
 
 const dragStart = (event) => {
   event.preventDefault();
-  event.dataTransfer.setData("text", event.target.id);
 };
 
 const dragOver = (event) => {

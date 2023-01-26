@@ -1,5 +1,55 @@
 // ======= CREATES THE SCHEDULE TABLE ======= //
 
+function onCellDrop(event) {
+  event.preventDefault();
+
+  console.log(event.target.innerHTML);
+
+  var subjectNameToBeTransfer = event.dataTransfer.getData("name");
+  var subjectValueToBeTransfer = event.dataTransfer.getData("value");
+
+  console.log("Nome da materia", subjectNameToBeTransfer);
+  console.log("Valor da materia", subjectValueToBeTransfer);
+
+  if (event.target.innerHTML === "" && subjectValueToBeTransfer > 0) {
+    console.log("A célula está vazia");
+
+    decrementValue(subjectNameToBeTransfer);
+    event.target.innerHTML = subjectNameToBeTransfer;
+    event.target.style.backgroundColor = "lightgray";
+    event.target.style.border = "1px solid gray";
+    event.target.style.cursor = "not-allowed";
+    event.target.setAttribute("draggable", false);
+    updateAllSubjectSquares();
+  } else if (event.target.innerHTML === "" && subjectValueToBeTransfer <= 0) {
+    console.log("A matéria não tem mais créditos");
+  } else if (event.target.innerHTML !== "" && subjectValueToBeTransfer > 0) {
+    var subjectNameTarget = event.target.innerHTML;
+    var subjectValueTarget = event.target.getAttribute("value");
+    console.log("Nome da materia", subjectNameTarget);
+    console.log("Valor da materia", subjectValueTarget);
+
+    console.log("A célula não está vazia");
+    decrementValue(subjectNameToBeTransfer);
+    incrementValue(subjectNameTarget);
+
+    var subjectInCell = event.dataTransfer.getData("name");
+    event.target.innerHTML = subjectNameToBeTransfer;
+
+    console.log("Materia na celula", subjectInCell);
+
+    localStorage.setItem("subjects", JSON.stringify(subjects));
+    updateAllSubjectSquares();
+  } else if (event.target.innerHTML !== "" && subjectValueToBeTransfer <= 0) {
+    console.log("A matéria não tem mais créditos");
+  }
+}
+
+function onDragOver(event) {
+  event.preventDefault();
+  console.log("cuuu");
+}
+
 const gerarTabela = (tableId) => {
   const table = document.getElementById(tableId);
 
@@ -14,11 +64,11 @@ const gerarTabela = (tableId) => {
     // Create 6 cells in each row
     for (let j = 0; j < 6; j++) {
       const cell = row.insertCell();
-      if (j === 0) {
+      if (j === 0 || i === 0) {
         cell.setAttribute("draggable", "false");
       } else {
-        cell.setAttribute("ondragover", "dragOver(event)");
-        cell.setAttribute("ondrop", "drop(event)");
+        cell.setAttribute("ondragover", "onDragOver(event)");
+        cell.setAttribute("ondrop", "onCellDrop(event)");
       }
 
       if (i === 0 && j > 0) {

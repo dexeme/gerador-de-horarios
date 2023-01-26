@@ -1,0 +1,20 @@
+Criar uma lista de disciplinas e suas respectivas cargas horárias
+
+
+Percorrer a lista de disciplinas e, para cada disciplina, sortear aleatoriamente um dia e um horário dentro da grade horária
+
+
+Verificar se a disciplina sorteada já está alocada naquele dia e horário
+
+
+Se a disciplina já estiver alocada, voltar ao passo 2 e sortear novamente
+
+
+Se a disciplina não estiver alocada, alocá-la naquele dia e horário e continuar para a próxima disciplina
+
+
+Repetir os passos 2 a 5 até que todas as disciplinas tenham sido alocadas
+
+
+Mostrar a tabela gerada com as disciplinas alocadas nos dias e horários sorteados.
+

@@ -1,169 +1,201 @@
-
 table {
-    width: 35%;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    margin: 0 auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+  width: 35%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .cell {
-    width: 20%;
-    padding: 30px;
-    text-align: center;
+  width: 20%;
+  padding: 30px;
+  text-align: center;
 }
 
-th, td {
-    border: 1px solid #dddddd;
-    padding: 12px;
-    text-align: center;
+th,
+td {
+  border: 1px solid #dddddd;
+  padding: 12px;
+  text-align: center;
 }
 
 th {
-    background-color: #dddddd;
-    font-weight: bold;
+  background-color: #dddddd;
+  font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
-input[type="text"], input[type="number"] {
-    width: 10%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+input[type="text"],
+input[type="number"] {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 select {
-    width: 10%;
-    padding: 12px 15px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+  width: 10%;
+  padding: 12px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 /* define a aparência dos quadrados */
 .subject-square {
-    width: 200px;
-    height: 25px;
-    background-color: rgb(228, 228, 228);
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 20px;
-    color: rgb(0, 0, 0);
+  width: 200px;
+  height: 25px;
+  background-color: rgb(228, 228, 228);
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
+.subject-square-disabled {
+  width: 200px;
+  height: 25px;
+  background-color: rgb(228, 228, 228);
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  opacity: 0.5;
 }
 
 /* define a aparência do container */
 #subjects-container {
-    position: absolute;
-    top: 100px;
-    right: auto;
-    left: 70px;
-    display: block;
+  position: absolute;
+  top: 100px;
+  right: auto;
+  left: 70px;
+  display: block;
 }
 
 /* BOTAO DE NAVEGAÇAO */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .action {
-    position: fixed;
-    bottom: 50px;
-    left: 50px;
-    width: 50px;
-    height: 50px;
-    background: #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.1);
-  }
-  .action span {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #a13dea;
-    font-size: 2em;
-    transition: .3s ease-in-out;
-  }
-  .action span:hover {
-      transform: rotate(135deg);
-  }
-  
-  .action ul {
-    position: absolute;
-    bottom: 55px;
-    background: #fff;
-    min-width: 250px;
-    padding: 20px;
-    border-radius: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: .3s;
-  }
-  .action:hover ul {
-    bottom: 65px;
-    opacity: 1;
-    visibility: visible;
-    transition: .3s;
-  }
-  .action ul li {
-    list-style:none;
-     text-decoration: none;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 7px 0;
-  }
-  
-  .action ul li:hover {
-    font-weight: 600;
-  }
-  .action ul li:not(:last-child) {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
-  .action ul li img {
-    margin-right: 15px;
-    opacity: .2;
-    transform: scale(.7);
-  }
-  .action ul li:hover img {  
-    opacity: .8;
-    transform: scale(1.0);
-  }
-  
-  .action ul.active {
-    bottom: 65px;
-    opacity: 1;
-    visibility: visible;
-    transition: .3s;
-  }
-  
-  .sub-buttons {
-    position: absolute;
-    bottom: 55px;
-    background: rgb(255, 11, 11);
-    min-width: 250px;
-    padding: 20px;
-    border-radius: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: .3s;
-  }
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+.action span {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a13dea;
+  font-size: 2em;
+  transition: 0.3s ease-in-out;
+}
+.action span:hover {
+  transform: rotate(135deg);
+}
+
+.action ul {
+  position: absolute;
+  bottom: 55px;
+  background: #fff;
+  min-width: 250px;
+  padding: 20px;
+  border-radius: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+.action:hover ul {
+  bottom: 65px;
+  opacity: 1;
+  visibility: visible;
+  transition: 0.3s;
+}
+.action ul li {
+  list-style: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 7px 0;
+}
+
+.action ul li:hover {
+  font-weight: 600;
+}
+.action ul li:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.action ul li img {
+  margin-right: 15px;
+  opacity: 0.2;
+  transform: scale(0.7);
+}
+.action ul li:hover img {
+  opacity: 0.8;
+  transform: scale(1);
+}
+
+.action ul.active {
+  bottom: 65px;
+  opacity: 1;
+  visibility: visible;
+  transition: 0.3s;
+}
+
+.sub-buttons {
+  position: absolute;
+  bottom: 55px;
+  background: rgb(255, 11, 11);
+  min-width: 250px;
+  padding: 20px;
+  border-radius: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+/* GERADOR DE HORARIOS  */
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.table-container {
+  width: 100%;
+  margin: 50px;
+}
+
+.table-container text {
+  font-size: 20px;
+  font-weight: bold;
+}

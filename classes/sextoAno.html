@@ -35,6 +35,9 @@
     <div class="action">
       <span id="main-button">+</span>
       <ul id="sub-buttons">
+        <li datalink='../schedulerGenerator.html' >
+          <img src='../icons/notes.png' width="25px">Gerar planos
+        </li>
         <li datalink="../index.html">
           <img src="../icons/notes.png" width="25px" />Cadastre Disciplinas
         </li>
@@ -53,6 +56,12 @@
       </ul>
     </div>
 
+    <script></script>
+    
+
+    <button id="salvarTabela" onclick="saveTable('tableSextoAno','schedule-table-sextoAno')">SALVAR</button>
+    
+    
     <script>
       buttons = document.querySelectorAll("#sub-buttons li");
       console.log(buttons);
@@ -70,6 +79,8 @@
           window.open(link, "_self");
         });
       });
+
+      // Quando recarregar a página ou trocar de guia, a tabela de horarios deve ser salva em uma variável
     </script>
   </body>
 </html>

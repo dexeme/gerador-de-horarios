@@ -89,7 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
   subjects = getSubjects();
   updateSubjectsTable(subjects);
   document.getElementById("btn").addEventListener("click", AddNewSubject);
-  document.getElementById("btn2").addEventListener("click", console.log("cu"));
+  document
+    .getElementById("btn2")
+    .addEventListener("click", console.log(subjects));
   document.getElementById("btn3").addEventListener("click", localStorage.clear);
 });
 
@@ -159,5 +161,10 @@ function updateAllSubjectSquares() {
     // Aqui você pode atualizar cada elemento como desejar
     // Exemplo:
     subjectSquare.innerHTML = subjects[i].name + " " + subjects[i].value;
+    if (subjects[i].value == 0) {
+      subjectSquare.classList.add("subject-square-disabled");
+    } else {
+      subjectSquare.classList.remove("subject-square-disabled");
+    }
   }
 }

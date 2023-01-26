@@ -33,6 +33,9 @@
     <div class="action">
       <span id="main-button">+</span>
       <ul id="sub-buttons">
+        <li datalink='../schedulerGenerator.html' >
+          <img src='../icons/notes.png' width="25px">Gerar planos
+        </li>
         <li datalink="../index.html">
           <img src="../icons/notes.png" width="25px" />Cadastre Disciplinas
         </li>
@@ -50,6 +53,8 @@
         </li>
       </ul>
     </div>
+
+    <button id="salvarTabela" onclick="saveTable('tableOitavoAno','schedule-table-oitavoAno')">SALVAR</button>
 
     <script>
       buttons = document.querySelectorAll("#sub-buttons li");

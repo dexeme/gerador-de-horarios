@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Config -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <!-- Links -->
+
+  <script src="./scripts/script.js"></script>
+  <script src="./scripts/subjects.js"></script>
+  <script src="./scripts/scheduleTable.js"></script>
+  <script src="./scripts/dragndrop.js"></script>
+
+  <link rel="icon" href="./favicons/icon-16x16.png" />
+  <link rel="stylesheet" href="/style.css" />
+
+  <!-- Page Title -->
+
+  <title>GERADOR</title>
+
+  <!-- Link para outra página -->
+  <body>
+    <!-- Tabela de horários -->
+
+    <table id="all-schedule-table">
+      <script>
+        // renderAllTables("all-schedule-table");
+        //  displaySubjects();
+      </script>
+    </table>
+
+    <div class="action">
+      <span id="main-button">+</span>
+      <ul id="sub-buttons">
+          <li datalink='schedulerGenerator.html' ><img src='./icons/notes.png' width="25px">Gerar planos</li>
+          <li datalink='index.html'><img src='./icons/notes.png' width="25px">Cadastre Disciplinas</li>
+          <li datalink='./classes/nonoAno.html' ><img src='./icons/nine.png' width="25px">Nono Ano</li>
+          <li datalink='./classes/oitavoAno.html' ><img src='./icons/eight.png' width="25px">Oitavo Ano</li>
+          <li datalink='./classes/setimoAno.html' ><img src='./icons/seven.png' width="25px">Sétimo Ano</li>
+          <li datalink='./classes/sextoAno.html' ><img src='./icons/six.png' width="25px">Sexto Ano</li>
+      </ul>
+  </div>
+
+    
+<div id="container">
+  <div id="sexto-ano" class="table-container">
+    <h1 id="title">Sexto Ano</h1>
+    <script>
+      document.getElementById("sexto-ano").innerHTML = localStorage.getItem('tableSextoAno')
+    </script>
+  </div>
+
+  <div id="setimo-ano" class="table-container">
+    <script>
+      document.getElementById("setimo-ano").innerHTML = localStorage.getItem('tableSetimoAno')
+    </script>
+  </div>
+
+  <div id="oitavo-ano" class="table-container">
+    <h1 id="title">Oitavo Ano</h1>
+    <script>
+      document.getElementById("oitavo-ano").innerHTML = localStorage.getItem('tableOitavoAno')
+    </script>
+  </div>
+
+  <div id="nono-ano" class="table-container">
+    <h1 id="title">Nono Ano</h1>
+    <script>
+      document.getElementById("nono-ano").innerHTML = localStorage.getItem('tableNonoAno')
+    </script>
+  </div>
+</div>
+
+
+
+
+
+    <script>
+      buttons = document.querySelectorAll("#sub-buttons li");
+      console.log(buttons);
+      mainButton = document.querySelector("#main-button");
+      mainButton.addEventListener("click", function () {
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].classList.toggle("show");
+        }
+      });
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", (e) => {
+          link = e.currentTarget.getAttribute("datalink");
+          console.log(link);
+          window.open(link, "_self");
+        });
+      });
+
+      // Quando recarregar a página ou trocar de guia, a tabela de horarios deve ser salva em uma variável
+    </script>
+
+
+
+
+  </body>
+</html>

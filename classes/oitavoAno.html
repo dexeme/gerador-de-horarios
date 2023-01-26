@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Config -->
 
-<!-- Config -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+  <!-- Links -->
 
-<!-- Links -->
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/subjects.js"></script>
+  <script src="../scripts/scheduleTable.js"></script>
+  <script src="../scripts/dragndrop.js"></script>
 
-<script src="/script.js"></script>
+  <link rel="icon" href="./favicons/icon-16x16.png" />
+  <link rel="stylesheet" href="/style.css" />
 
-<link rel="icon" href="./favicons/icon-16x16.png">
-<link rel="stylesheet" href="/style.css">
+  <!-- Page Title -->
 
-<!-- Page Title -->
+  <title>OITAVO ANO</title>
 
-<title>OITAVO ANO</title>
-
-
-<!-- Link para outra página -->
-<body>
-
-
-<table id="schedule-table-oitavoAno">
+  <!-- Link para outra página -->
+  <body>
+    <table id="schedule-table-oitavoAno">
       <script>
-        gerarTabela('schedule-table-oitavoAno');
+        gerarTabela("schedule-table-oitavoAno");
         displaySubjects();
-    </script>
-  </table>
-  
-  <div class="action">
-    <span id="main-button">+</span>
-    <ul id="sub-buttons">
-        <li datalink='../index.html' ><img src='../icons/notes.png' width="25px">Cadastre Disciplinas</li>
-        <li datalink='nonoAno.html' ><img src='../icons/nine.png' width="25px">Nono Ano</li>
-        <li datalink='oitavoAno.html' ><img src='../icons/eight.png' width="25px">Oitavo Ano</li>
-        <li datalink='setimoAno.html' ><img src='../icons/seven.png' width="25px">Sétimo Ano</li>
-        <li datalink='sextoAno.html' ><img src='../icons/six.png' width="25px">Sexto Ano</li>
-    </ul>
-</div>
+      </script>
+    </table>
 
+    <div class="action">
+      <span id="main-button">+</span>
+      <ul id="sub-buttons">
+        <li datalink="../index.html">
+          <img src="../icons/notes.png" width="25px" />Cadastre Disciplinas
+        </li>
+        <li datalink="nonoAno.html">
+          <img src="../icons/nine.png" width="25px" />Nono Ano
+        </li>
+        <li datalink="oitavoAno.html">
+          <img src="../icons/eight.png" width="25px" />Oitavo Ano
+        </li>
+        <li datalink="setimoAno.html">
+          <img src="../icons/seven.png" width="25px" />Sétimo Ano
+        </li>
+        <li datalink="sextoAno.html">
+          <img src="../icons/six.png" width="25px" />Sexto Ano
+        </li>
+      </ul>
+    </div>
 
-
-
-  
-<script>
-    buttons = document.querySelectorAll('#sub-buttons li');
-    console.log(buttons)
-    mainButton = document.querySelector('#main-button');
-    mainButton.addEventListener('click', function() {
+    <script>
+      buttons = document.querySelectorAll("#sub-buttons li");
+      console.log(buttons);
+      mainButton = document.querySelector("#main-button");
+      mainButton.addEventListener("click", function () {
         for (let i = 0; i < buttons.length; i++) {
-            buttons[i].classList.toggle('show');
+          buttons[i].classList.toggle("show");
         }
-    });
+      });
 
-    buttons.forEach(function(button) {
-        button.addEventListener('click', e => {
-           link = e.currentTarget.getAttribute('datalink');
-           console.log(link)
-           window.open(link, "_self");
-            
+      buttons.forEach(function (button) {
+        button.addEventListener("click", (e) => {
+          link = e.currentTarget.getAttribute("datalink");
+          console.log(link);
+          window.open(link, "_self");
         });
-    });
-
-</script>
+      });
+    </script>
+  </body>
+</html>

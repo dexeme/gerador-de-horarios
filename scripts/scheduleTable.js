@@ -136,71 +136,79 @@ function saveCellsData(tableId) {
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+    
 
+function completarPrimeiraTabelaAutomaticamente(nome) {
+var tabela = document.getElementById(nome);
+var celulas = tabela.getElementsByTagName("td");
+var subjects = JSON.parse(localStorage.getItem("subjects"));
 
-function completarTabelaDeHorariosAutomaticamente(nome, tabela2, tabela3, tabela4) {
-  var tabela = document.getElementById(nome);
-  var celulas = tabela.getElementsByTagName("td");
-  var subjects = JSON.parse(localStorage.getItem("subjects"));
-
-  for (var i = 0; i < celulas.length; i++) {
-    var celula = celulas[i];
-    if (celula.innerHTML != "") {
-      for (var j = 0; j < subjects.length; j++) {
-        
-        if (celula.innerHTML === subjects[j].name) {
-          subjects[j].value--;
-        }
-      }
-    }
-  }
-
-  for (var i = 0; i < celulas.length; i++) {
-    var celula = celulas[i];
-    if (celula.innerHTML === "") {
-      var materiaAleatoria = subjects[getRandomNumber(0, subjects.length - 1)];
-
-      while (materiaAleatoria.value <= 0) {
-        materiaAleatoria = subjects[getRandomNumber(0, subjects.length - 1)];
-      }
-
-      celula.innerHTML = materiaAleatoria.name;
-      celula.style.backgroundColor =  materiaAleatoria.color;
-
-      switch(materiaAleatoria.name) {
-        case "Português":
-          celula.style.backgroundColor = "#E2B4BD";
-          break;
-        case "Matemática":
-          celula.style.backgroundColor = "#7D98A1";
-          break;
-        case "História":
-          celula.style.backgroundColor = "#5A5353";
-          break;
-        case "Geografia":
-          celula.style.backgroundColor = "#8FC0A9";
-          break;
-        case "Inglês":
-          celula.style.backgroundColor = "#48BEFF";
-          break;
-        case "Ed Física":
-          celula.style.backgroundColor = "#F2BB05";
-          break;
-        case "Artes":
-          celula.style.backgroundColor = "#F4D35E";
-          break;
-        case "Ciências":
-          celula.style.backgroundColor = "#45B69C";
-          break;
-
-        default:
-          break;
-
-
-      }
+for (var i = 0; i < celulas.length; i++) {
+  var celula = celulas[i];
+  if (celula.innerHTML != "") {
+    for (var j = 0; j < subjects.length; j++) {
       
-      materiaAleatoria.value--;
+      if (celula.innerHTML === subjects[j].name) {
+        subjects[j].value--;
+      }
     }
   }
 }
+
+for (var i = 0; i < celulas.length; i++) {
+  var celula = celulas[i];
+  if (celula.innerHTML === "") {
+    var materiaAleatoria = subjects[getRandomNumber(0, subjects.length - 1)];
+
+    while (materiaAleatoria.value <= 0) {
+      materiaAleatoria = subjects[getRandomNumber(0, subjects.length - 1)];
+    }
+
+    celula.innerHTML = materiaAleatoria.name;
+    celula.style.backgroundColor =  materiaAleatoria.color;
+
+    materiaAleatoria.value--;
+  }
+}
+}
+
+
   
+function completarSegundaTabelaAutomaticamente(tabela1, tabela2) {
+  var tabela1 = document.getElementById(tabela1);
+  var tabela2 = document.getElementById(tabela2);
+  
+  var celulasTabela1 = tabela1.getElementsByTagName("td");
+  var celulasTabela2 = tabela2.getElementsByTagName("td");
+  
+  var subjects = JSON.parse(localStorage.getItem("subjects"));
+  
+  
+  for (var i = 0; i < celulasTabela2.length; i++) {
+    var primeiraCelula = celulasTabela1[i];
+    var segundaCelula = celulasTabela2[i];
+
+    var materiasDisponiveis = subjects.slice();
+    var materiasTentadas = subjects.slice();
+
+    if (segundaCelula.innerHTML === '') {
+  
+      var materiaAleatoria = materiasTentadas[getRandomNumber(0, materiasTentadas.length - 1)];
+      segundaCelula.innerHTML = materiaAleatoria.name;
+
+      while (segundaCelula.innerHTML === primeiraCelula.innerHTML || materiaAleatoria.value <= 0) {
+        materiaAleatoria = materiasTentadas[getRandomNumber(0, materiasTentadas.length - 1)];
+        console.log(materiaAleatoria.name)
+        var index = materiasTentadas.indexOf(materiaAleatoria);
+        materiasTentadas.splice(index, 1);
+        segundaCelula.innerHTML = materiaAleatoria.name;
+        console.log('tentou');
+        console.log(materiasTentadas.length)
+      }
+        materiaAleatoria.value--;
+        
+        segundaCelula.innerHTML = materiaAleatoria.name;
+        
+    }    
+  }
+}

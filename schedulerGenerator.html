@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <!-- Config -->
-
+  
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,80 +9,75 @@
 
   <!-- Links -->
 
-
+  
   <script src="./scripts/subjects.js"></script>
   <script src="./scripts/scheduleTable.js"></script>
   <script src="./scripts/dragndrop.js"></script>
-
+  
   <link rel="icon" href="./favicons/icon-16x16.png" />
   <link rel="stylesheet" href="/style.css" />
-
+  
   <!-- Page Title -->
-
+  
   <title>GERADOR</title>
-
+  
   <!-- Link para outra página -->
   <body>
     <!-- Tabela de horários -->
-
+    
     <table id="all-schedule-table">
       <script>
         // renderAllTables("all-schedule-table");
         //  displaySubjects();
-      </script>
+        </script>
     </table>
-
+    
     <div class="action">
       <span id="main-button">+</span>
       <ul id="sub-buttons">
-          <li datalink='schedulerGenerator.html' ><img src='./icons/notes.png' width="25px">Gerar planos</li>
-          <li datalink='index.html'><img src='./icons/notes.png' width="25px">Cadastre Disciplinas</li>
-          <li datalink='./classes/nonoAno.html' ><img src='./icons/nine.png' width="25px">Nono Ano</li>
-          <li datalink='./classes/oitavoAno.html' ><img src='./icons/eight.png' width="25px">Oitavo Ano</li>
-          <li datalink='./classes/setimoAno.html' ><img src='./icons/seven.png' width="25px">Sétimo Ano</li>
-          <li datalink='./classes/sextoAno.html' ><img src='./icons/six.png' width="25px">Sexto Ano</li>
+        <li datalink='schedulerGenerator.html' ><img src='./icons/engrenagem.png' width="25px">Gerar planos</li>
+        <li datalink='index.html'><img src='./icons/notes.png' width="25px">Cadastre Disciplinas</li>
       </ul>
+    </div>
+    
+
+    
+    <button id="completeTable" onclick="atribuirCelulasNaTabela()">Completar</button>
+    <button id="saveTable" onclick="saveTable()">Salvar</button>
+    <button id="clearTable" onclick="clearTable()">Limpar</button>
+    
+    
+    <div id="container">
+      <div id="sexto-ano" class="table-container">
+        <h1 id="title">Sexto Ano</h1>
+        <script>
+      document.getElementById("sexto-ano").innerHTML = localStorage.getItem('tableSextoAno')    
+    </script>    
   </div>
-
-  <button id="salvarTabela" onclick="atribuirCelulasNaTabela()">Completar</button>
-  <button id="salvarTabela" onclick="generateTableData()">Linhas</button>
-  <button id="salvarTabela" onclick="assignCells()">Celulas</button>
-
-
-<div id="container">
-  <div id="sexto-ano" class="table-container">
-    <h1 id="title">Sexto Ano</h1>
-    <script>
-      document.getElementById("sexto-ano").innerHTML = localStorage.getItem('tableSextoAno')
-    </script>
-  </div>
-
+  
   <div id="setimo-ano" class="table-container">
     <script>
       document.getElementById("setimo-ano").innerHTML = localStorage.getItem('tableSetimoAno')
-    </script>
+    </script>    
   </div>
 
   <div id="oitavo-ano" class="table-container">
     <h1 id="title">Oitavo Ano</h1>
     <script>
       document.getElementById("oitavo-ano").innerHTML = localStorage.getItem('tableOitavoAno')
-    </script>
+    </script>    
   </div>
 
   <div id="nono-ano" class="table-container">
     <h1 id="title">Nono Ano</h1>
     <script>
       document.getElementById("nono-ano").innerHTML = localStorage.getItem('tableNonoAno')
-    </script>
+    </script>    
   </div>
-</div>
-
-
-
-
-
-    <script>
+  
+  
+  
+  <script>
       buttons = document.querySelectorAll("#sub-buttons li");
       console.log(buttons);
       mainButton = document.querySelector("#main-button");
@@ -105,6 +100,8 @@
 
 
 
-
-  </body>
+</body>
 </html>
+
+
+

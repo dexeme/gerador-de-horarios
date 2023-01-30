@@ -412,7 +412,7 @@ function onCellDrop2(event) {
 materiaAlvoIndex = materiaAlvoIndex + (materiaAlvoRow-1)*5;
  if (materiaArrastada != cellTable[0][materiaAlvoIndex-1].innerHTML && materiaArrastada != cellTable[1][materiaAlvoIndex-1].innerHTML 
   && materiaArrastada != cellTable[2][materiaAlvoIndex-1].innerHTML && materiaAlvo != cellTable[0][materiaArrastadaIndex-1].innerHTML 
-  && materiaAlvo != cellTable[1][materiaArrastadaIndex-1].innerHTML){
+  && materiaAlvo != cellTable[1][materiaArrastadaIndex-1].innerHTML && materiaAlvo != cellTable[2][materiaArrastadaIndex-1].innerHTML){
     
 
     celulasEscolhidas = getCelulasComMaterias(document.getElementById(materiaAlvoTable).getElementsByTagName('td'));
@@ -444,6 +444,7 @@ materiaAlvoIndex = materiaAlvoIndex + (materiaAlvoRow-1)*5;
   
 
 function atribuirCelulasNaTabela() {
+  clearTable();
   var dict = generateTableData();
 
 
@@ -492,4 +493,22 @@ for (var j =0; j <4; j++){
     todasCelulas[j][i].style.backgroundColor = atribuirCorNaCelula(dict[year[j]][i-11])
   }
 }}
+
+
+function clearTable() {
+  var cellTable1 = getCelulasComMaterias(document.getElementById('sexto-ano').getElementsByTagName('td'));
+  var cellTable2 = getCelulasComMaterias(document.getElementById('setimo-ano').getElementsByTagName('td'));
+  var cellTable3 = getCelulasComMaterias(document.getElementById('oitavo-ano').getElementsByTagName('td'));
+  var cellTable4 = getCelulasComMaterias(document.getElementById('nono-ano').getElementsByTagName('td'));
+
+
+  var todasCelulas = [cellTable1, cellTable2, cellTable3, cellTable4];
+
+  for (var i = 0; i < todasCelulas.length; i++) {
+    for (var j = 0; j < todasCelulas[i].length; j++) {
+      todasCelulas[i][j].innerHTML = '';
+      todasCelulas[i][j].style.backgroundColor = 'white';
+    }
+  }
+}
 

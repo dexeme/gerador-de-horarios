@@ -8,7 +8,6 @@ const updateSubjectsTable = (subjects) => {
     row.innerHTML = `
         <td>${subject.value}</td>
         <td>${subject.name}</td>
-        <td>${subject.times}</td>
         `;
     // Create a delete button for each row
     let btn = document.createElement("BUTTON");
@@ -55,7 +54,6 @@ const AddNewSubject = () => {
     id: Date.now(),
     value: document.getElementById("valueInput").value,
     name: document.getElementById("name").value,
-    times: document.getElementById("times").value,
   };
   if (subject.value === "" || subject.name === "") {
     alert("Preencha todos os campos!");

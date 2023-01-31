@@ -378,6 +378,17 @@ function ondragstart2(event, index) {
 
 }
 
+function renderizarMensagemNoRetangulo(mensagem, cor) {
+  var retangulo = document.getElementById('rect');
+  retangulo.innerHTML = mensagem;
+  retangulo.style.color = cor;
+
+  setTimeout(function() {
+    retangulo.innerHTML = '';
+  }, 4000);
+
+}
+
 function onCellDrop2(event) {
   event.preventDefault();
   var materiaAlvo = event.target.innerHTML;
@@ -414,7 +425,8 @@ materiaAlvoIndex = materiaAlvoIndex + (materiaAlvoRow-1)*5;
   && materiaArrastada != cellTable[2][materiaAlvoIndex-1].innerHTML && materiaAlvo != cellTable[0][materiaArrastadaIndex-1].innerHTML 
   && materiaAlvo != cellTable[1][materiaArrastadaIndex-1].innerHTML && materiaAlvo != cellTable[2][materiaArrastadaIndex-1].innerHTML){
     
-
+    
+    renderizarMensagemNoRetangulo('TROCA DE MATERIA REALIZADA!', 'green');
     celulasEscolhidas = getCelulasComMaterias(document.getElementById(materiaAlvoTable).getElementsByTagName('td'));
     
     event.target.innerHTML = materiaArrastada;
@@ -425,11 +437,11 @@ materiaAlvoIndex = materiaAlvoIndex + (materiaAlvoRow-1)*5;
     celulasEscolhidas[materiaArrastadaIndex-1].style.backgroundColor = atribuirCorNaCelula(materiaAlvo);
 
     event.dataTransfer.setData('name', event.target.innerHTML);
-    console.log('entrou');
     
   
  } else {
-  console.log('não entrou');
+  renderizarMensagemNoRetangulo('CHOQUE DE HORÁRIOS!', 'red')
+
 
  }
 

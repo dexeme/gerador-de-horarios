@@ -40,7 +40,19 @@
       </ul>
     </div>
     
+    
+<div id="rect"></div>
 
+<script>
+        gerarTabela("sexto-ano")
+        gerarTabela("setimo-ano")
+        gerarTabela("oitavo-ano")
+        gerarTabela("nono-ano")
+        saveTable(tableSextoAno, "sexto-ano")
+        saveTable(tableSetimoAno, "setimo-ano")
+        saveTable(tableOitavoAno, "oitavo-ano")
+        saveTable(tableNonoAno, "nono-ano")
+</script>
     
     <button id="completeTable" onclick="atribuirCelulasNaTabela()">Completar</button>
     <button id="saveTable" onclick="saveTable()">Salvar</button>
@@ -56,6 +68,7 @@
   </div>
   
   <div id="setimo-ano" class="table-container">
+    <h1 id="title">Sétimo Ano</h1>
     <script>
       document.getElementById("setimo-ano").innerHTML = localStorage.getItem('tableSetimoAno')
     </script>    
@@ -95,11 +108,7 @@
         });
       });
 
-      // Quando recarregar a página ou trocar de guia, a tabela de horarios deve ser salva em uma variável
     </script>
-
-
-
 </body>
 </html>
 
